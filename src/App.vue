@@ -6,7 +6,7 @@
 
 <script>
 import StoredResources from './components/learning-resources/StoredResources.vue';
-import AddResource from './components/AddResource.vue';
+import AddResource from './components/learning-resources/AddResource.vue';
 import TheHeader from './components/Layouts/TheHeader';
 
 export default {
