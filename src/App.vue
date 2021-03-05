@@ -1,20 +1,16 @@
 <template>
-  <ul>
-    <LearningResource
-      v-for="res in storedResources"
-      v-bind:key="res.id"
-      v-bind:title="res.title"
-      v-bind:description="res.description"
-      v-bind:link="res.link"
-    />
-  </ul>
+  <TheHeader title="Resource Links"/>
+  <AddResource v-on:submit-resource="submitResource" />
+  <StoredResources v-bind:resources="storedResources" />
 </template>
 
 <script>
-import LearningResource from './components/learning-resources/LearningResource.vue';
+import StoredResources from './components/learning-resources/StoredResources.vue';
+import AddResource from './components/AddResource.vue';
+import TheHeader from './components/Layouts/TheHeader';
 
 export default {
-  components: { LearningResource },
+  components: { StoredResources, AddResource, TheHeader },
 
   data: function() {
     return {
@@ -33,12 +29,33 @@ export default {
         }
       ]
     };
+  },
+  methods: {
+    submitResource(title, desc, link) {
+      const newResource = {
+        id: new Date().toISOString(),
+        title: title,
+        description: desc,
+        link: link
+      };
+      this.storedResources.push(newResource);
+    }
   }
 };
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Roboto', sans-serif;
+}
+
 body {
-    background-color: grey;
+  margin: 0;
 }
 </style>
