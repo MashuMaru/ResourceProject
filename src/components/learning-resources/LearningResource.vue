@@ -8,14 +8,24 @@
     </div>
     <p>{{ description }}</p>
     <nav>
-      <a v-bind:href="link">Link resource.</a>
+      <a v-bind:href="link" target="_blank">Link resource.</a>
     </nav>
   </li>
 </template>
 
 <script>
 export default {
-  props: ['title', 'description', 'link']
+  props: {
+    title: {
+      type: String
+    },
+    description: {
+      type: String
+    },
+    link: {
+      type: String
+    }
+  }
 };
 </script>
 
