@@ -1,12 +1,12 @@
 <template>
-  <button v-bind:type="type" v-bind:class="mode">
-      <slot></slot>
+  <button v-bind:class="mode">
+    <slot></slot>
   </button>
 </template>
 
 <script>
 export default {
-    props: ['type', 'mode']
+  props: ['mode']
 };
 </script>
 

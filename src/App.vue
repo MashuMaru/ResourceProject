@@ -1,7 +1,6 @@
 <template>
   <TheHeader title="Resource Links" />
   <TheResources />
-  <!-- <AddResource v-on:submit-resource="submitResource" /> -->
 </template>
 
 <script>
@@ -12,15 +11,7 @@ export default {
   components: { TheHeader, TheResources },
 
   methods: {
-    submitResource(title, desc, link) {
-      const newResource = {
-        id: new Date().toISOString(),
-        title: title,
-        description: desc,
-        link: link
-      };
-      this.storedResources.push(newResource);
-    }
+    
   }
 };
 </script>

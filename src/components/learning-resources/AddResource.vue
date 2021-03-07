@@ -1,55 +1,71 @@
 <template>
   <base-card>
     <form v-on:submit.prevent="submitResource">
-      <input v-model="resourceTitle" type="text" placeholder="title" />
-      <input v-model="resourceDesc" type="text" placeholder="description" />
-      <input v-model="resourceLink" type="text" placeholder="link" />
-      <base-button>Add to resources</base-button>
+      <div class="form-control">
+        <label for="title">Title</label>
+        <input id="title" name="title" type="text" ref="titleInput" />
+      </div>
 
-      <error-alert v-if="inputIsValid">
-        <h2>Input is invalid!</h2>
-        <p>You have to add at least a title..</p>
-        <button v-on:click="errorConfirmed">Gotcha!</button>
-      </error-alert>
+      <div class="form-control">
+        <label for="description">Description</label>
+        <textarea
+          id="description"
+          name="description"
+          rows="3"
+          ref="descInput"
+        ></textarea>
+      </div>
+      <div>
+        <label for="link">Link</label>
+        <input id="link" name="link" type="url" ref="linkInput" />
+      </div>
+      <div>
+        <base-button type="submit">Add Resources</base-button>
+      </div>
     </form>
   </base-card>
 </template>
 
 <script>
-import ErrorAlert from '../ErrorAlert.vue';
 import BaseCard from '../UI/BaseCard';
 export default {
-  components: { ErrorAlert, BaseCard },
-  emits: ['submit-resource'],
-  data: function() {
-    return {
-      resourceTitle: '',
-      resourceDesc: '',
-      resourceLink: '',
-      inputIsValid: false
-    };
-  },
+  components: { BaseCard },
   methods: {
-    submitResource() {
-      if (this.resourceTitle === '') {
-        this.inputIsValid = true;
-      } else {
-        this.$emit(
-          'submit-resource',
-          this.resourceTitle,
-          this.resourceDesc,
-          this.resourceLink
-        );
-        (this.resourceTitle = ''),
-          (this.resourceDesc = ''),
-          (this.resourceLink = '');
-      }
-    },
-    errorConfirmed() {
-      this.inputIsValid = false;
+    submitData() {
+      const enteredTitle = this.$refs.titleInput.value;
+      const enteredDescription = this.$refs.descInput.value;
+      const enteredURL = this.$refs.linkInput.value;
+
+      
     }
   }
 };
 </script>
 
-<style></style>
+<style>
+label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+input,
+textarea {
+  display: block;
+  width: 100%;
+  font: inherit;
+  padding: 0.15rem;
+  border: 1px solid #ccc;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: #3a0061;
+  background-color: #f7ebff;
+}
+
+.form-control {
+  margin: 1rem 0;
+}
+</style>
